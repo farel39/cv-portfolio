@@ -1,6 +1,6 @@
 ---
 title: SIAsisten Reborn Backend
-description: Django + DRF backend for Fasilkom UI's teaching-assistant management system, rebuilt for 2026 in the PPL course. JWT auth via UI's CAS SSO, OCR-based document processing (Tesseract + OpenCV), PDF and Excel report generation, structured logging, Prometheus metrics, and a full GitLab CI pipeline with SonarQube quality gates.
+description: We're rebuilding Fasilkom UI's TA management system for 2026, replacing one that's been in production for over a decade. My main surfaces have been the CAS SSO integration, the OCR pipeline (Tesseract + OpenCV) for scanned supporting documents, and the report generators that produce the PDFs and spreadsheets lecturers actually need. Observability via Prometheus and structlog; CI on GitLab with SonarQube quality gates that actually fail the build.
 tags: [Django, DRF, PostgreSQL, JWT, Docker, GitLab CI]
 repo: https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2026/kelas-a/a1-siasisten2026/siasisten-reborn-back-end
 repoHost: gitlab

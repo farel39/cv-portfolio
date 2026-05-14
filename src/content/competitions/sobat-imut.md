@@ -11,4 +11,4 @@ tags: [Sentence-Transformers, Cross-Encoder, Contrastive Learning, CLIP, NDCG]
 order: 2
 ---
 
-End-to-end search system on the Wayfair WANDS dataset. Compared BM25, bi-encoder dense retrieval (MiniLM-L6), and cross-encoder reranking (ms-marco MiniLM-L12) fine-tuned with contrastive learning. A 41M-param fine-tuned cross-encoder **beat the 560M BAAI/bge-reranker-large** at NDCG@10 (0.850 vs 0.833). Integrated CLIP for multimodal visual search.
+Product search on Wayfair's WANDS dataset. We compared BM25, a dense bi-encoder (MiniLM-L6), and a cross-encoder reranker (ms-marco MiniLM-L12). After a few epochs of contrastive fine-tuning, our 41M-param cross-encoder **beat the off-the-shelf 560M-param BAAI/bge-reranker-large** on NDCG@10 (0.850 vs 0.833). At least on this dataset, bigger isn't always better. Bolted CLIP on at the end for image queries.

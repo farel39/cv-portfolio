@@ -16,28 +16,29 @@ const facts = [
     <div class="grid md:grid-cols-5 gap-10 items-start">
       <div class="md:col-span-3 space-y-4 leading-relaxed" style="color: var(--color-text-muted);">
         <p>
-          I'm a Computer Science student who enjoys building things end-to-end
-          and figuring out why machine learning models behave the way they do.
-          Most of my recent work splits between two tracks:
+          Started CS at Universitas Indonesia in 2023. By the third semester
+          I'd shipped enough Django apps, Spring services, and ML notebooks
+          to figure out which parts of the stack I keep coming back to:
+          mostly backends and ML pipelines.
         </p>
         <p>
-          <span style="color: var(--color-text);">Software engineering</span>:
-          team projects in Spring Boot, Next.js, and Django, including a
-          Software Engineering Project (PPL) course where I work on the next
-          iteration of <span class="text-accent">SIAsisten</span>, Fasilkom UI's
-          teaching-assistant management system.
+          Most of my time these days goes to{' '}
+          <span class="text-accent">SIAsisten Reborn</span>. My team is
+          rebuilding Fasilkom UI's teaching-assistant management system for
+          2026 in our PPL course, replacing one that's been in production for
+          over a decade. Django REST backend, React Router 7 frontend, with the
+          production sundries: CAS SSO, structured logging, Prometheus, GitLab
+          CI fronted by SonarQube.
         </p>
         <p>
-          <span style="color: var(--color-text);">ML / data science</span>:
-          gradient boosting for network-traffic classification, dense retrieval
-          plus cross-encoder reranking for e-commerce search, and a multimodal
-          deepfake-detection proposal combining audio-visual feature fusion
-          with explainability (LIME) and identity traceability (DRN).
+          The rest goes to data-science competitions with a small crew of
+          friends. Finalist twice (AIRNOLOGY DataQuest 2024, SPARK Telkomsel
+          2025) and 3rd at Datathon RISTEK 2024. Lately the work has been more
+          NLP and CV than tabular.
         </p>
         <p>
-          Outside of coursework I compete on data-science and hackathon teams,
-          usually with the same crew of Fasilkom friends, and tinker with Godot
-          for fun.
+          When I'm not doing either of those, I'm tinkering with Godot or
+          reading too much about ML systems.
         </p>
       </div>
 
@@ -45,7 +46,6 @@ const facts = [
         class="md:col-span-2 rounded-lg p-6"
         style="background: color-mix(in oklch, var(--color-surface) 60%, transparent); border: 1px solid var(--color-border);"
       >
-        <p class="font-mono text-xs mb-4" style="color: var(--color-text-dim);">// quick facts</p>
         <ul class="space-y-3 text-sm">
           {facts.map((f) => (
             <li class="grid grid-cols-[6.5rem_1fr] gap-2">

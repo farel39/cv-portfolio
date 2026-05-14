@@ -1,6 +1,6 @@
 ---
 title: The Farlands
-description: A game built in Godot Engine, with scenes, scripts, and custom shaders. Personal project to learn game-engine architecture from scratch.
+description: "An ongoing Godot project. Mostly an excuse to learn how a game engine actually fits together: scenes, signals, the renderer, GDShader. Status: perpetually in progress."
 tags: [Godot, GDScript, GDShader, Game Dev]
 repo: https://github.com/farel39/the-farlands
 repoHost: github

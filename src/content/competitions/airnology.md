@@ -12,4 +12,4 @@ tags: [CatBoost, Feature Engineering, Imbalanced Data, EDA]
 order: 1
 ---
 
-Multi-class classification of network flow traffic (Benign, Probing, Bruteforce, XMRIGCC CryptoMiner, …) on a highly-imbalanced 416k-row dataset. Engineered ratio + aggregation features over raw flow stats, used error-analysis-driven feature engineering to fix Benign/Probing confusion, and trained CatBoost / LightGBM / XGBoost. The final CatBoost model scored **0.88461** on the custom metric → 2nd on the private leaderboard.
+Six-class classification on 416k network flows, heavily imbalanced (CryptoMiner traffic was 0.6% of training data). We tried LightGBM, XGBoost, and CatBoost; CatBoost won. What actually moved the needle wasn't the model. After staring at the confusion matrix for a while we noticed that a chunk of the "Benign vs Probing" errors were really duplicated rows with conflicting labels, and a feature flagging them lifted us into the finalist spot. Final score **0.88461**.
