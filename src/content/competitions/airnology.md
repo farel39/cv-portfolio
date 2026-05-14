@@ -5,6 +5,9 @@ event: AIRNOLOGY 3.0 DataQuest 2024 · Fasilkom UI
 kind: competition
 award: 🏅 Finalist · 2nd on Private LB (0.88461)
 pdf: /pdf/maya-tilis-airnology.pdf
+cover: /img/dataquest-airnology-2024.jpeg
+coverAlt: Team Maya Tilis presenting the AIRNOLOGY 3.0 DataQuest model selection at Fasilkom UI
+coverFit: contain
 tags: [CatBoost, Feature Engineering, Imbalanced Data, EDA]
 order: 1
 ---

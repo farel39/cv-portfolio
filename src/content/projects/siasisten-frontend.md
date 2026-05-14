@@ -5,6 +5,7 @@ tags: [React 19, React Router v7, TypeScript, Vite, Tailwind CSS, shadcn/ui]
 repo: https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2026/kelas-a/a1-siasisten2026/siasisten-reborn-front-end
 repoHost: gitlab
 role: Frontend engineer (team)
+isPrivate: true
 order: 4
 icon: layout
 ---

@@ -3,10 +3,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 // Deployed to Vercel (pure static, no adapter needed).
-// If you wire up a custom domain or want canonical URLs in <head>,
-// set `site: 'https://your-domain.com'` here.
+// `site` populates <link rel="canonical">, Open Graph URLs, and any
+// future @astrojs/sitemap output. Update if you move to a custom domain.
 
 export default defineConfig({
+  site: 'https://portfolio-argya-farel-kasyara.vercel.app',
   vite: {
     plugins: [tailwindcss()],
   },

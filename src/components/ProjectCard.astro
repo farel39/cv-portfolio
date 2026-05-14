@@ -9,10 +9,14 @@ interface Props {
   repoHost: 'github' | 'gitlab';
   role?: string;
   featured?: boolean;
+  isPrivate?: boolean;
   icon: 'folder' | 'globe' | 'gamepad' | 'car' | 'shield' | 'layout' | 'cpu' | 'database' | 'flask' | 'graph';
 }
 
-const { title, description, tags, repo, repoHost, role, featured = false, icon } = Astro.props;
+const {
+  title, description, tags, repo, repoHost, role,
+  featured = false, isPrivate = false, icon,
+} = Astro.props;
 ---
 
 <article
@@ -30,22 +34,35 @@ const { title, description, tags, repo, repoHost, role, featured = false, icon }
           featured
         </span>
       )}
-      <a
-        href={repo}
-        target="_blank"
-        rel="noopener"
-        aria-label={`${repoHost === 'gitlab' ? 'GitLab' : 'GitHub'} repository`}
-        class="hover:text-accent transition"
-      >
-        <Icon name={repoHost} size={18} />
-      </a>
+      {isPrivate ? (
+        <span
+          class="tag"
+          title="Source is private (e.g. coursework on a closed GitLab); the project is real, the repo just isn't publicly viewable."
+        >
+          private repo
+        </span>
+      ) : (
+        <a
+          href={repo}
+          target="_blank"
+          rel="noopener"
+          aria-label={`${repoHost === 'gitlab' ? 'GitLab' : 'GitHub'} repository`}
+          class="hover:text-accent transition"
+        >
+          <Icon name={repoHost} size={18} />
+        </a>
+      )}
     </div>
   </header>
 
   <h4 class="text-lg font-semibold" style="color: var(--color-text);">
-    <a href={repo} target="_blank" rel="noopener" class="hover:text-accent transition">
-      {title}
-    </a>
+    {isPrivate ? (
+      <span>{title}</span>
+    ) : (
+      <a href={repo} target="_blank" rel="noopener" class="hover:text-accent transition">
+        {title}
+      </a>
+    )}
   </h4>
 
   <p class="text-sm leading-relaxed flex-grow" style="color: var(--color-text-muted);">

@@ -6,6 +6,7 @@ repo: https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2026/kelas-a/a1-siasisten2026/s
 repoHost: gitlab
 role: Backend engineer (team)
 featured: true
+isPrivate: true
 order: 3
 icon: database
 ---

@@ -10,6 +10,10 @@ const projects = defineCollection({
     repoHost: z.enum(['github', 'gitlab']).default('github'),
     role: z.string().optional(),
     featured: z.boolean().default(false),
+    isPrivate: z.boolean().default(false),
+    // isPrivate=true → hide repo link on the site (link target would 404 for visitors).
+    // The project is still listed; a "private repo" tag replaces the icon link.
+    // (Named isPrivate, not private, because `private` is a TypeScript reserved word.)
     order: z.number().default(99),
     icon: z.enum([
       'folder', 'globe', 'gamepad', 'car', 'shield', 'layout',
