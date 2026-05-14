@@ -1,0 +1,64 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  repo: string;
+  repoHost: 'github' | 'gitlab';
+  role?: string;
+  featured?: boolean;
+  icon: 'folder' | 'globe' | 'gamepad' | 'car' | 'shield' | 'layout' | 'cpu' | 'database' | 'flask' | 'graph';
+}
+
+const { title, description, tags, repo, repoHost, role, featured = false, icon } = Astro.props;
+---
+
+<article
+  class="card p-6 flex flex-col gap-3 h-full"
+  data-card
+  data-featured={featured}
+>
+  <header class="flex items-center justify-between">
+    <div class="text-accent">
+      <Icon name={icon} size={32} />
+    </div>
+    <div class="flex items-center gap-3" style="color: var(--color-text-muted);">
+      {featured && (
+        <span class="tag" style="color: var(--color-accent); border-color: color-mix(in oklch, var(--color-accent) 30%, transparent);">
+          featured
+        </span>
+      )}
+      <a
+        href={repo}
+        target="_blank"
+        rel="noopener"
+        aria-label={`${repoHost === 'gitlab' ? 'GitLab' : 'GitHub'} repository`}
+        class="hover:text-accent transition"
+      >
+        <Icon name={repoHost} size={18} />
+      </a>
+    </div>
+  </header>
+
+  <h4 class="text-lg font-semibold" style="color: var(--color-text);">
+    <a href={repo} target="_blank" rel="noopener" class="hover:text-accent transition">
+      {title}
+    </a>
+  </h4>
+
+  <p class="text-sm leading-relaxed flex-grow" style="color: var(--color-text-muted);">
+    {description}
+  </p>
+
+  {role && (
+    <p class="font-mono text-xs" style="color: var(--color-text-dim);">
+      // {role}
+    </p>
+  )}
+
+  <ul class="flex flex-wrap gap-2 mt-1" role="list">
+    {tags.map((t) => <li class="tag">{t}</li>)}
+  </ul>
+</article>

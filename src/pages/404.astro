@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout title="404 · page not found" description="The page you tried to visit doesn't exist.">
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative">
+      <p class="font-mono text-accent text-sm mb-4">// status: 404</p>
+      <h1 class="text-7xl sm:text-8xl font-extrabold tracking-tight" style="color: var(--color-text);">
+        404
+      </h1>
+      <p class="mt-4 text-lg" style="color: var(--color-text-muted);">
+        I couldn't find that page. Maybe it moved, or never existed.
+      </p>
+
+      <a href={import.meta.env.BASE_URL} class="btn mt-10">
+        <Icon name="arrow" size={16} class="rotate-180" />
+        Back to home
+      </a>
+    </div>
+  </main>
+</Layout>

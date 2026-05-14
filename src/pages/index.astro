@@ -1,0 +1,227 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Education from '../components/Education.astro';
+import Skills from '../components/Skills.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const competitionEntries = await getCollection('competitions');
+const competitions = await Promise.all(
+  competitionEntries
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (entry) => {
+      const { Content } = await render(entry);
+      // Render the MD body to an HTML string we can hand to the card.
+      // We use astro:content's render() and capture via a fake container.
+      return { entry, Content };
+    }),
+);
+
+// Build base for asset URLs (in case site is deployed under /cv-portfolio)
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Layout>
+  <Nav />
+
+  <main>
+    <Hero />
+    <About />
+    <Education />
+    <Skills />
+
+    <!-- ===================== PROJECTS ===================== -->
+    <section id="projects" class="py-28 px-6 reveal">
+      <div class="max-w-6xl mx-auto">
+        <h3 class="section-h">
+          <span class="step">04.</span>Projects
+        </h3>
+        <p class="-mt-3 mb-10 max-w-2xl" style="color: var(--color-text-dim);">
+          Selected repos from coursework, teamwork, and personal projects.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((p) => (
+            <ProjectCard
+              title={p.data.title}
+              description={p.data.description}
+              tags={p.data.tags}
+              repo={p.data.repo}
+              repoHost={p.data.repoHost}
+              role={p.data.role}
+              featured={p.data.featured}
+              icon={p.data.icon}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMPETITIONS ===================== -->
+    <section
+      id="competitions"
+      class="py-28 px-6 reveal"
+      style="background: color-mix(in oklch, var(--color-surface) 40%, transparent); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);"
+    >
+      <div class="max-w-5xl mx-auto">
+        <h3 class="section-h">
+          <span class="step">05.</span>Competitions &amp; research
+        </h3>
+        <p class="-mt-3 mb-10 max-w-2xl" style="color: var(--color-text-dim);">
+          Team submissions where I led or contributed to the ML / engineering side.
+        </p>
+
+        <div class="space-y-8">
+          {competitions.map(({ entry, Content }) => (
+            <article class="card overflow-hidden" data-card>
+              <div class={entry.data.cover && entry.data.coverFit === 'cover' ? 'grid md:grid-cols-[260px_1fr] gap-0' : ''}>
+                {entry.data.cover && entry.data.coverFit === 'cover' && (
+                  <div
+                    class="relative h-56 md:h-auto"
+                    style="border-bottom: 1px solid var(--color-border);"
+                  >
+                    <img
+                      src={`${base}${entry.data.cover}`}
+                      alt={entry.data.coverAlt ?? `${entry.data.team} at ${entry.data.event}`}
+                      class="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div
+                      class="absolute inset-0 pointer-events-none"
+                      style="background: linear-gradient(180deg, transparent 50%, color-mix(in oklch, var(--color-bg) 50%, transparent) 100%);"
+                      aria-hidden="true"
+                    ></div>
+                  </div>
+                )}
+
+                {entry.data.cover && entry.data.coverFit === 'contain' && (
+                  <div
+                    class="flex items-center justify-center p-4 sm:p-6"
+                    style="background: color-mix(in oklch, var(--color-surface-2) 50%, transparent); border-bottom: 1px solid var(--color-border);"
+                  >
+                    <img
+                      src={`${base}${entry.data.cover}`}
+                      alt={entry.data.coverAlt ?? `${entry.data.team} at ${entry.data.event}`}
+                      class="w-full h-auto max-h-[460px] object-contain rounded-md"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                )}
+
+                <div class="p-8">
+                  <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <span class="font-mono text-xs uppercase tracking-wider text-accent">
+                      {entry.data.kind === 'paper' ? 'Technical paper' : entry.data.kind === 'proposal' ? 'Proposal' : 'Competition'}
+                    </span>
+                    {entry.data.award && (
+                      <span
+                        class="tag"
+                        style="color: var(--color-accent); background: color-mix(in oklch, var(--color-accent) 10%, transparent); border-color: color-mix(in oklch, var(--color-accent) 30%, transparent);"
+                      >
+                        {entry.data.award}
+                      </span>
+                    )}
+                  </div>
+
+                  <h4 class="text-xl sm:text-2xl font-semibold leading-tight" style="color: var(--color-text);">
+                    {entry.data.title}
+                  </h4>
+                  <p class="text-sm mt-2 mb-4 font-mono" style="color: var(--color-text-dim);">
+                    {entry.data.team} &middot; {entry.data.event}
+                  </p>
+
+                  <div class="prose-comp leading-relaxed text-sm sm:text-base" style="color: var(--color-text-muted);">
+                    <Content />
+                  </div>
+
+                  <ul class="flex flex-wrap gap-2 mt-5">
+                    {entry.data.tags.map((t) => <li class="tag">{t}</li>)}
+                  </ul>
+
+                  {entry.data.pdf && (
+                    <a
+                      href={`${base}${entry.data.pdf}`}
+                      target="_blank"
+                      rel="noopener"
+                      class="link-underline inline-flex items-center gap-2 font-mono text-sm mt-6"
+                    >
+                      {entry.data.kind === 'paper'
+                        ? 'Read the paper →'
+                        : entry.data.kind === 'proposal'
+                        ? 'Read the proposal →'
+                        : 'Read the slide deck →'}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // ---- Reveal-on-scroll for any element with class `reveal` ----
+  function bindReveal() {
+    const els = document.querySelectorAll('.reveal:not(.visible)');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('visible'));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' },
+    );
+    els.forEach((el) => io.observe(el));
+  }
+
+  // ---- Mouse-position spotlight on cards ----
+  function bindCardSpotlight() {
+    document.querySelectorAll<HTMLElement>('[data-card]').forEach((card) => {
+      if ((card as any)._spot) return;
+      (card as any)._spot = true;
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+  }
+
+  function init() {
+    bindReveal();
+    bindCardSpotlight();
+  }
+
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>
+
+<style is:global>
+  .prose-comp p + p { margin-top: 0.75rem; }
+  .prose-comp strong { color: var(--color-text); font-weight: 600; }
+</style>

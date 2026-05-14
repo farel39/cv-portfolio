@@ -1,0 +1,71 @@
+---
+import Icon from './Icon.astro';
+
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#education', label: 'Education' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#competitions', label: 'Competitions' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav
+  class="fixed top-0 inset-x-0 z-50 backdrop-blur-md border-b transition-colors"
+  style="background: color-mix(in oklch, var(--color-bg) 70%, transparent); border-color: color-mix(in oklch, var(--color-border) 60%, transparent);"
+>
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#top" class="font-mono text-sm text-accent hover:opacity-80 transition">
+      <span style="color: var(--color-text-dim);">~/</span>argya<span class="caret" style="height: 0.9em; width: 0.5ch;"></span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-7 text-sm" style="color: var(--color-text-muted);">
+      {links.map((l, i) => (
+        <li>
+          <a href={l.href} class="hover:text-accent transition flex items-center gap-1.5">
+            <span class="font-mono text-xs" style="color: var(--color-text-dim);">0{i + 1}.</span>
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      id="theme-toggle"
+      aria-label="Toggle color theme"
+      class="p-2 rounded-md transition hover:bg-white/5"
+      style="color: var(--color-text-muted);"
+    >
+      <Icon name="moon" size={18} class="theme-icon-dark" />
+      <Icon name="sun" size={18} class="theme-icon-light hidden" />
+    </button>
+  </div>
+</nav>
+
+<script>
+  function bindTheme() {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle || (toggle as any)._bound) return;
+    (toggle as any)._bound = true;
+
+    const root = document.documentElement;
+    const iconDark = toggle.querySelector('.theme-icon-dark');
+    const iconLight = toggle.querySelector('.theme-icon-light');
+
+    // sync icon to current state
+    if (root.classList.contains('light')) {
+      iconDark?.classList.add('hidden');
+      iconLight?.classList.remove('hidden');
+    }
+
+    toggle.addEventListener('click', () => {
+      const isLight = root.classList.toggle('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      iconDark?.classList.toggle('hidden', isLight);
+      iconLight?.classList.toggle('hidden', !isLight);
+    });
+  }
+  bindTheme();
+  document.addEventListener('astro:after-swap', bindTheme);
+</script>

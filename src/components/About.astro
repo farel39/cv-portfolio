@@ -1,0 +1,60 @@
+---
+const facts = [
+  { label: 'Based in',  value: 'Jakarta, Indonesia' },
+  { label: 'Studying',  value: 'CS at Fasilkom UI' },
+  { label: 'Languages', value: 'Bahasa Indonesia, English' },
+  { label: 'Currently', value: 'PPL: SIAsisten Reborn' },
+];
+---
+
+<section id="about" class="py-28 px-6 reveal">
+  <div class="max-w-4xl mx-auto">
+    <h3 class="section-h">
+      <span class="step">01.</span>About me
+    </h3>
+
+    <div class="grid md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-3 space-y-4 leading-relaxed" style="color: var(--color-text-muted);">
+        <p>
+          I'm a Computer Science student who enjoys building things end-to-end
+          and figuring out why machine learning models behave the way they do.
+          Most of my recent work splits between two tracks:
+        </p>
+        <p>
+          <span style="color: var(--color-text);">Software engineering</span>:
+          team projects in Spring Boot, Next.js, and Django, including a
+          Software Engineering Project (PPL) course where I work on the next
+          iteration of <span class="text-accent">SIAsisten</span>, Fasilkom UI's
+          teaching-assistant management system.
+        </p>
+        <p>
+          <span style="color: var(--color-text);">ML / data science</span>:
+          gradient boosting for network-traffic classification, dense retrieval
+          plus cross-encoder reranking for e-commerce search, and a multimodal
+          deepfake-detection proposal combining audio-visual feature fusion
+          with explainability (LIME) and identity traceability (DRN).
+        </p>
+        <p>
+          Outside of coursework I compete on data-science and hackathon teams,
+          usually with the same crew of Fasilkom friends, and tinker with Godot
+          for fun.
+        </p>
+      </div>
+
+      <aside
+        class="md:col-span-2 rounded-lg p-6"
+        style="background: color-mix(in oklch, var(--color-surface) 60%, transparent); border: 1px solid var(--color-border);"
+      >
+        <p class="font-mono text-xs mb-4" style="color: var(--color-text-dim);">// quick facts</p>
+        <ul class="space-y-3 text-sm">
+          {facts.map((f) => (
+            <li class="grid grid-cols-[6.5rem_1fr] gap-2">
+              <span style="color: var(--color-text-dim);">{f.label}</span>
+              <span style="color: var(--color-text);">{f.value}</span>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>

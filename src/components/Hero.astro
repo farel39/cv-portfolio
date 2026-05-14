@@ -1,0 +1,125 @@
+---
+import Icon from './Icon.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const portrait = `${base}/img/argya-portrait.jpg`;
+---
+
+<header id="top" class="relative min-h-screen flex items-center px-6 pt-24 pb-16 overflow-hidden">
+  <!-- background grid -->
+  <div class="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative max-w-6xl mx-auto w-full grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-16 items-center">
+    <!-- ===== text column ===== -->
+    <div>
+      <!-- mobile-only avatar above the greeting -->
+      <div class="lg:hidden mb-8 animate-fade-up" style="animation-delay: 0s;">
+        <div
+          class="relative w-24 h-24 rounded-full overflow-hidden"
+          style="border: 2px solid color-mix(in oklch, var(--color-accent) 60%, transparent); box-shadow: 0 0 24px color-mix(in oklch, var(--color-accent) 20%, transparent);"
+        >
+          <img
+            src={portrait}
+            alt="Argya Farel Kasyara"
+            width="96"
+            height="96"
+            class="w-full h-full object-cover"
+            style="object-position: 50% 25%;"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <p
+        class="font-mono text-accent text-sm mb-5 animate-fade-up flex items-center gap-2"
+        style="animation-delay: 0.05s;"
+      >
+        <span style="color: var(--color-text-dim);">{'>'}</span>
+        hello world, my name is
+      </p>
+
+      <h1
+        class="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight animate-fade-up"
+        style="animation-delay: 0.15s;"
+      >
+        Argya Farel Kasyara.
+      </h1>
+
+      <h2
+        class="text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight mt-3 animate-fade-up"
+        style="animation-delay: 0.25s; color: var(--color-text-muted);"
+      >
+        I build software &amp; train models.
+      </h2>
+
+      <p
+        class="mt-8 max-w-2xl text-base sm:text-lg leading-relaxed animate-fade-up"
+        style="animation-delay: 0.35s; color: var(--color-text-muted);"
+      >
+        Computer Science undergrad at{' '}
+        <a href="https://cs.ui.ac.id" target="_blank" rel="noopener" class="link-underline">
+          Fakultas Ilmu Komputer, Universitas Indonesia
+        </a>. I work across the full stack, from Spring Boot APIs to Next.js
+        frontends, and spend a lot of time training models for data competitions
+        (NLP, computer vision, tabular ML).
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-4 animate-fade-up" style="animation-delay: 0.45s;">
+        <a href="#projects" class="btn">
+          See my work <Icon name="arrow" size={16} />
+        </a>
+        <a href="mailto:argyafarel.kasyara@gmail.com" class="btn btn-ghost">
+          <Icon name="mail" size={16} /> Get in touch
+        </a>
+      </div>
+
+      <!-- Status pill -->
+      <div
+        class="mt-12 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono animate-fade-up"
+        style="animation-delay: 0.6s; background: color-mix(in oklch, var(--color-surface) 80%, transparent); border: 1px solid var(--color-border); color: var(--color-text-muted);"
+      >
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping" style="background: var(--color-accent);"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--color-accent);"></span>
+        </span>
+        currently building <span style="color: var(--color-text);">SIAsisten Reborn</span> in PPL
+      </div>
+    </div>
+
+    <!-- ===== portrait column (lg+ only) ===== -->
+    <div
+      class="hidden lg:flex flex-col items-center animate-fade-up"
+      style="animation-delay: 0.3s;"
+    >
+      <div
+        class="relative w-full max-w-[280px] aspect-[4/5] rounded-2xl overflow-hidden group"
+        style="border: 1px solid color-mix(in oklch, var(--color-accent) 35%, var(--color-border)); box-shadow: 0 30px 80px -30px color-mix(in oklch, var(--color-accent) 35%, transparent), 0 0 0 1px color-mix(in oklch, var(--color-accent) 10%, transparent);"
+      >
+        <img
+          src={portrait}
+          alt="Portrait of Argya Farel Kasyara wearing the Universitas Indonesia yellow jacket"
+          width="280"
+          height="350"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          style="object-position: 50% 22%;"
+          loading="eager"
+          decoding="async"
+        />
+        <!-- subtle gradient overlay for cohesion with dark theme -->
+        <div
+          class="absolute inset-0 pointer-events-none"
+          style="background: linear-gradient(180deg, transparent 60%, color-mix(in oklch, var(--color-bg) 25%, transparent) 100%);"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- scroll cue -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2" style="color: var(--color-text-dim);">
+    <span class="text-xs font-mono uppercase tracking-widest">scroll</span>
+    <Icon name="chevron-down" size={20} class="animate-bounce" />
+  </div>
+</header>

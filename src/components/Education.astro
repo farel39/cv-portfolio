@@ -1,0 +1,133 @@
+---
+const groups = [
+  {
+    title: 'Algorithms & theory',
+    items: [
+      'Data Structures & Algorithms',
+      'Design & Analysis of Algorithms',
+      'Theory of Languages & Automata',
+      'Computational Geometry',
+      'Discrete Mathematics 1 & 2',
+    ],
+  },
+  {
+    title: 'Systems & engineering',
+    items: [
+      'Operating Systems',
+      'Computer Networks',
+      'Software Engineering',
+      'Software Engineering Project (PPL)',
+      'Parallel Programming',
+      'Software Security',
+      'Embedded Systems',
+    ],
+  },
+  {
+    title: 'Data & ML',
+    items: [
+      'AI & Data Science Foundations',
+      'Deep Learning',
+      'Data Mining',
+      'Knowledge Graphs',
+      'Numerical Analysis',
+    ],
+  },
+  {
+    title: 'Foundations',
+    items: [
+      'Advanced Programming',
+      'Databases',
+      'Platform-Based Programming',
+      'Calculus 1 & 2',
+      'Linear Algebra',
+      'Statistics & Probability',
+    ],
+  },
+];
+
+const currentlyTaking = new Set([
+  'Software Engineering Project (PPL)',
+  'Deep Learning',
+  'Data Mining',
+  'Parallel Programming',
+]);
+---
+
+<section id="education" class="py-28 px-6 reveal">
+  <div class="max-w-5xl mx-auto">
+    <h3 class="section-h">
+      <span class="step">02.</span>Education
+    </h3>
+
+    <!-- Degree summary card -->
+    <div
+      class="card p-6 sm:p-8 mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+      data-card
+    >
+      <div class="space-y-1">
+        <p class="font-mono text-xs uppercase tracking-wider text-accent">
+          // degree
+        </p>
+        <h4 class="text-xl sm:text-2xl font-semibold" style="color: var(--color-text);">
+          B.Sc. Computer Science
+        </h4>
+        <p style="color: var(--color-text-muted);">
+          Faculty of Computer Science, Universitas Indonesia
+        </p>
+        <p class="font-mono text-xs" style="color: var(--color-text-dim);">
+          2023 to 2027 (expected)
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 sm:gap-10">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-wider" style="color: var(--color-text-dim);">
+            GPA
+          </p>
+          <p class="text-3xl sm:text-4xl font-bold text-accent mt-1 tabular-nums">
+            4.00
+            <span class="text-sm font-mono" style="color: var(--color-text-dim);">/ 4.00</span>
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-xs uppercase tracking-wider" style="color: var(--color-text-dim);">
+            Expected
+          </p>
+          <p class="text-3xl sm:text-4xl font-bold mt-1 tabular-nums" style="color: var(--color-text);">
+            2027
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses grouped by area -->
+    <p class="font-mono text-xs uppercase tracking-wider mb-4" style="color: var(--color-text-dim);">
+      // key coursework
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {groups.map((g) => (
+        <div class="card p-5">
+          <h4 class="font-mono text-sm text-accent mb-3 tracking-wide">{g.title}</h4>
+          <ul class="space-y-2 text-sm" style="color: var(--color-text);">
+            {g.items.map((it) => (
+              <li class="flex items-start gap-2">
+                <span class="text-accent mt-1" aria-hidden="true">▸</span>
+                <span class="flex-1">
+                  {it}
+                  {currentlyTaking.has(it) && (
+                    <span
+                      class="ml-1.5 font-mono text-[0.6rem] px-1.5 py-0.5 rounded-full align-middle"
+                      style="color: var(--color-accent); background: color-mix(in oklch, var(--color-accent) 12%, transparent); border: 1px solid color-mix(in oklch, var(--color-accent) 30%, transparent);"
+                    >
+                      now
+                    </span>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
